@@ -22,14 +22,24 @@ class ToDoDB:
     def __init__(self):
         self.todos = []
 
+    def get_all(self):
+        return self.todos
+
     def create(self, title, description, due_date):
         todo = ToDoModel(title, description, due_date)
         self.todos.append(todo)
         return todo
 
+    def update(self, title):
+        for todo in self.todos:
+            if todo.title == title:
+                found_todo = todo
+                found_todo.status = "_is_done"
+                return found_todo
+
     def delete(self, title):
         for todo in self.todos:
             if todo.title == title:
                 found_todo = todo
-        found_todo.status = "_is_deleted"
-        return found_todo
+                found_todo.status = "_is_deleted"
+                return found_todo
